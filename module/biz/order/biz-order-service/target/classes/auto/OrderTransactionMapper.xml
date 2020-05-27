@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.athen.order.repository.OrderTransactionMapper">
+    <resultMap id="BaseResultMap" type="com.athen.order.api.model.OrderTransaction">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+        <result column="account" jdbcType="VARCHAR" property="account" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="amount" jdbcType="BIGINT" property="amount" />
+        <result column="integral" jdbcType="INTEGER" property="integral" />
+        <result column="pay_state" jdbcType="INTEGER" property="payState" />
+        <result column="source" jdbcType="INTEGER" property="source" />
+        <result column="order_id" jdbcType="BIGINT" property="orderId" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="completion_time" jdbcType="TIMESTAMP" property="completionTime" />
+        <result column="message" jdbcType="VARCHAR" property="message" />
+        <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        `id`, `trade_no`, `account`, `member_id`, `amount`, `integral`, `pay_state`, `source`, 
+        `order_id`, `status`, `completion_time`, `message`, `reply_time`, `note`, `create_time`, 
+        `update_time`
+    </sql>
+    <select id="selectByExample" parameterType="com.athen.order.api.model.OrderTransactionExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from `order_transaction`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from `order_transaction`
+        where `id` = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `order_transaction`
+        where `id` = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.athen.order.api.model.OrderTransactionExample">
+        delete from `order_transaction`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.athen.order.api.model.OrderTransaction" useGeneratedKeys="true">
+        insert into `order_transaction`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="tradeNo != null">
+                `trade_no`,
+            </if>
+            <if test="account != null">
+                `account`,
+            </if>
+            <if test="memberId != null">
+                `member_id`,
+            </if>
+            <if test="amount != null">
+                `amount`,
+            </if>
+            <if test="integral != null">
+                `integral`,
+            </if>
+            <if test="payState != null">
+                `pay_state`,
+            </if>
+            <if test="source != null">
+                `source`,
+            </if>
+            <if test="orderId != null">
+                `order_id`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="completionTime != null">
+                `completion_time`,
+            </if>
+            <if test="message != null">
+                `message`,
+            </if>
+            <if test="replyTime != null">
+                `reply_time`,
+            </if>
+            <if test="note != null">
+                `note`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="updateTime != null">
+                `update_time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=BIGINT},
+            </if>
+            <if test="integral != null">
+                #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="payState != null">
+                #{payState,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="completionTime != null">
+                #{completionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="replyTime != null">
+                #{replyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.athen.order.api.model.OrderTransactionExample" resultType="java.lang.Integer">
+        select count(*) from `order_transaction`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update `order_transaction`
+        <set>
+            <if test="record.id != null">
+                `id` = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.tradeNo != null">
+                `trade_no` = #{record.tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.account != null">
+                `account` = #{record.account,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberId != null">
+                `member_id` = #{record.memberId,jdbcType=BIGINT},
+            </if>
+            <if test="record.amount != null">
+                `amount` = #{record.amount,jdbcType=BIGINT},
+            </if>
+            <if test="record.integral != null">
+                `integral` = #{record.integral,jdbcType=INTEGER},
+            </if>
+            <if test="record.payState != null">
+                `pay_state` = #{record.payState,jdbcType=INTEGER},
+            </if>
+            <if test="record.source != null">
+                `source` = #{record.source,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderId != null">
+                `order_id` = #{record.orderId,jdbcType=BIGINT},
+            </if>
+            <if test="record.status != null">
+                `status` = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.completionTime != null">
+                `completion_time` = #{record.completionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.message != null">
+                `message` = #{record.message,jdbcType=VARCHAR},
+            </if>
+            <if test="record.replyTime != null">
+                `reply_time` = #{record.replyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.note != null">
+                `note` = #{record.note,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.athen.order.api.model.OrderTransaction">
+        update `order_transaction`
+        <set>
+            <if test="tradeNo != null">
+                `trade_no` = #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                `account` = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                `member_id` = #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                `amount` = #{amount,jdbcType=BIGINT},
+            </if>
+            <if test="integral != null">
+                `integral` = #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="payState != null">
+                `pay_state` = #{payState,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                `source` = #{source,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                `order_id` = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="completionTime != null">
+                `completion_time` = #{completionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="message != null">
+                `message` = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="replyTime != null">
+                `reply_time` = #{replyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                `note` = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where `id` = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

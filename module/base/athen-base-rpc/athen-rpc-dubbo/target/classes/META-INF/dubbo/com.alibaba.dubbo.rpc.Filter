@@ -1,0 +1,3 @@
+exceptionFilter=com.alibaba.dubbo.rpc.filter.ExceptionFilter
+paramProviderFilter=com.alibaba.dubbo.rpc.filter.DataSourceParamProviderFilter
+paramConsumerFilter=com.alibaba.dubbo.rpc.filter.DataSourceParamConsumerFilter

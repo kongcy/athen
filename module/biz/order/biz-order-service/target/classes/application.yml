@@ -1,0 +1,39 @@
+
+## org.springframework.boot.autoconfigure.web.ServerProperties
+server:
+  port: 6070
+  session-timeout: 2592000  # 单位: 秒. <= 30 * 24 * 60 * 60
+
+
+online: false
+
+# dubbo
+spring:
+    dubbo:
+      application:
+       name: order-dubbo-provider
+      registry:
+        address: zookeeper://47.52.198.122:2181
+      protocol:
+        name: dubbo
+        port: 20672
+      scan:
+        base-packages: com.athen.order.service
+      check: false
+
+
+
+# 默认会去找 classpath 下的 logback.xml. 为了达到 profile 的目的故意不用这个文件名
+#logging.config: classpath:log-dev.xml
+
+# 数据源配置
+druid:
+  url: jdbc:mysql://47.52.198.122:3306/athen-priview?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true&transformedBitIsBoolean=true
+  userName: root
+  password: chenying
+  driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+# # 加载mybatis 数据类型转换配置
+handler:
+     packagesName: com.athen.order.api.handler

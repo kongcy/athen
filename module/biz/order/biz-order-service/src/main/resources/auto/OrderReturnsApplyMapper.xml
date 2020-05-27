@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.athen.order.repository.OrderReturnsApplyMapper">
+    <resultMap id="BaseResultMap" type="com.athen.order.api.model.OrderReturnsApply">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+        <result column="order_detail_id" jdbcType="VARCHAR" property="orderDetailId" />
+        <result column="return_no" jdbcType="VARCHAR" property="returnNo" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="product_status" jdbcType="INTEGER" property="productStatus" />
+        <result column="why" jdbcType="VARCHAR" property="why" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+        <result column="audit_why" jdbcType="VARCHAR" property="auditWhy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.athen.order.api.model.OrderReturnsApply">
+        <result column="note" jdbcType="LONGVARCHAR" property="note" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        `id`, `order_no`, `order_detail_id`, `return_no`, `member_id`, `state`, `product_status`, 
+        `why`, `status`, `audit_time`, `audit_why`, `create_time`, `update_time`
+    </sql>
+    <sql id="Blob_Column_List">
+        `note`
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.athen.order.api.model.OrderReturnsApplyExample" resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from `order_returns_apply`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.athen.order.api.model.OrderReturnsApplyExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from `order_returns_apply`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from `order_returns_apply`
+        where `id` = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `order_returns_apply`
+        where `id` = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.athen.order.api.model.OrderReturnsApplyExample">
+        delete from `order_returns_apply`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.athen.order.api.model.OrderReturnsApply" useGeneratedKeys="true">
+        insert into `order_returns_apply`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="orderNo != null">
+                `order_no`,
+            </if>
+            <if test="orderDetailId != null">
+                `order_detail_id`,
+            </if>
+            <if test="returnNo != null">
+                `return_no`,
+            </if>
+            <if test="memberId != null">
+                `member_id`,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="productStatus != null">
+                `product_status`,
+            </if>
+            <if test="why != null">
+                `why`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="auditTime != null">
+                `audit_time`,
+            </if>
+            <if test="auditWhy != null">
+                `audit_why`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="updateTime != null">
+                `update_time`,
+            </if>
+            <if test="note != null">
+                `note`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDetailId != null">
+                #{orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="returnNo != null">
+                #{returnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="productStatus != null">
+                #{productStatus,jdbcType=INTEGER},
+            </if>
+            <if test="why != null">
+                #{why,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditWhy != null">
+                #{auditWhy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                #{note,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.athen.order.api.model.OrderReturnsApplyExample" resultType="java.lang.Integer">
+        select count(*) from `order_returns_apply`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update `order_returns_apply`
+        <set>
+            <if test="record.id != null">
+                `id` = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderNo != null">
+                `order_no` = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderDetailId != null">
+                `order_detail_id` = #{record.orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.returnNo != null">
+                `return_no` = #{record.returnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberId != null">
+                `member_id` = #{record.memberId,jdbcType=BIGINT},
+            </if>
+            <if test="record.state != null">
+                `state` = #{record.state,jdbcType=INTEGER},
+            </if>
+            <if test="record.productStatus != null">
+                `product_status` = #{record.productStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.why != null">
+                `why` = #{record.why,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                `status` = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditTime != null">
+                `audit_time` = #{record.auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auditWhy != null">
+                `audit_why` = #{record.auditWhy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.note != null">
+                `note` = #{record.note,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.athen.order.api.model.OrderReturnsApply">
+        update `order_returns_apply`
+        <set>
+            <if test="orderNo != null">
+                `order_no` = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDetailId != null">
+                `order_detail_id` = #{orderDetailId,jdbcType=VARCHAR},
+            </if>
+            <if test="returnNo != null">
+                `return_no` = #{returnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                `member_id` = #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="state != null">
+                `state` = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="productStatus != null">
+                `product_status` = #{productStatus,jdbcType=INTEGER},
+            </if>
+            <if test="why != null">
+                `why` = #{why,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                `audit_time` = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditWhy != null">
+                `audit_why` = #{auditWhy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="note != null">
+                `note` = #{note,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where `id` = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,56 @@
+
+## org.springframework.boot.autoconfigure.web.ServerProperties
+server:
+  port: 7070
+  session-timeout: 2592000  # 单位: 秒. <= 30 * 24 * 60 * 60
+
+
+online: false
+
+# dubbo
+spring:
+    dubbo:
+      server: true
+
+      application:
+       name: system-dubbo-provider
+      registry:
+        address: zookeeper://47.52.198.122:2181
+      protocol:
+        name: dubbo
+        port: 20772
+      scan:
+        base-packages: com.athen.system.service
+      provider:
+        filter: exceptionFilter
+
+
+# 默认会去找 classpath 下的 logback.xml. 为了达到 profile 的目的故意不用这个文件名
+#logging.config: classpath:log-dev.xml
+
+# 数据源配置
+datasource:
+         group:
+           master:
+             url: jdbc:mysql://47.52.198.122:3306/athen-priview?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true&transformedBitIsBoolean=true
+             userName: root
+             password: chenying
+             driver-class-name: com.mysql.cj.jdbc.Driver
+           slave:
+             url: jdbc:mysql://47.52.198.122:3306/athen-priview?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true&transformedBitIsBoolean=true
+             userName: root
+             password: chenying
+             driver-class-name: com.mysql.cj.jdbc.Driver
+         # 连接池配置
+         pool:
+           connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+           filters: stat,wall #filters: #配置多个英文逗号分隔(统计，sql注入，log4j过滤)
+           testWhileIdle: true
+# # 加载mybatis 数据类型转换配置
+handler:
+    # packagesName: com.athen.system.api.model.enums
+   packagesName: com.athen.system.api.handler
+
+logging:
+  pattern:
+    level: DEBUG

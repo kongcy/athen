@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.athen.dubbo.annotation.EnableCustomDubboService
+
+org.springframework.context.ApplicationListener=\
+com.athen.dubbo.listener.DubboBannerApplicationListener

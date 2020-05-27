@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.athen.order.repository.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.athen.order.api.model.Order">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+        <result column="member_id" jdbcType="BIGINT" property="memberId" />
+        <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
+        <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+        <result column="after_status" jdbcType="INTEGER" property="afterStatus" />
+        <result column="product_amount_total" jdbcType="BIGINT" property="productAmountTotal" />
+        <result column="order_amount_total" jdbcType="BIGINT" property="orderAmountTotal" />
+        <result column="logistics_fee" jdbcType="BIGINT" property="logisticsFee" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="pay_channel" jdbcType="INTEGER" property="payChannel" />
+        <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+        <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+        <result column="order_settlement_status" jdbcType="INTEGER" property="orderSettlementStatus" />
+        <result column="order_settlement_time" jdbcType="TIMESTAMP" property="orderSettlementTime" />
+        <result column="is_package" jdbcType="INTEGER" property="isPackage" />
+        <result column="is_integral" jdbcType="INTEGER" property="isIntegral" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        `id`, `order_no`, `member_id`, `supplier_id`, `supplier_name`, `order_status`, `after_status`, 
+        `product_amount_total`, `order_amount_total`, `logistics_fee`, `address`, `pay_channel`, 
+        `trade_no`, `pay_time`, `delivery_time`, `finish_time`, `order_settlement_status`, 
+        `order_settlement_time`, `is_package`, `is_integral`, `create_time`, `update_time`, 
+        `delete_time`
+    </sql>
+    <select id="selectByExample" parameterType="com.athen.order.api.model.OrderExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from `order`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from `order`
+        where `id` = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from `order`
+        where `id` = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.athen.order.api.model.OrderExample">
+        delete from `order`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.athen.order.api.model.Order" useGeneratedKeys="true">
+        insert into `order`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="orderNo != null">
+                `order_no`,
+            </if>
+            <if test="memberId != null">
+                `member_id`,
+            </if>
+            <if test="supplierId != null">
+                `supplier_id`,
+            </if>
+            <if test="supplierName != null">
+                `supplier_name`,
+            </if>
+            <if test="orderStatus != null">
+                `order_status`,
+            </if>
+            <if test="afterStatus != null">
+                `after_status`,
+            </if>
+            <if test="productAmountTotal != null">
+                `product_amount_total`,
+            </if>
+            <if test="orderAmountTotal != null">
+                `order_amount_total`,
+            </if>
+            <if test="logisticsFee != null">
+                `logistics_fee`,
+            </if>
+            <if test="address != null">
+                `address`,
+            </if>
+            <if test="payChannel != null">
+                `pay_channel`,
+            </if>
+            <if test="tradeNo != null">
+                `trade_no`,
+            </if>
+            <if test="payTime != null">
+                `pay_time`,
+            </if>
+            <if test="deliveryTime != null">
+                `delivery_time`,
+            </if>
+            <if test="finishTime != null">
+                `finish_time`,
+            </if>
+            <if test="orderSettlementStatus != null">
+                `order_settlement_status`,
+            </if>
+            <if test="orderSettlementTime != null">
+                `order_settlement_time`,
+            </if>
+            <if test="isPackage != null">
+                `is_package`,
+            </if>
+            <if test="isIntegral != null">
+                `is_integral`,
+            </if>
+            <if test="createTime != null">
+                `create_time`,
+            </if>
+            <if test="updateTime != null">
+                `update_time`,
+            </if>
+            <if test="deleteTime != null">
+                `delete_time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="supplierId != null">
+                #{supplierId,jdbcType=BIGINT},
+            </if>
+            <if test="supplierName != null">
+                #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="afterStatus != null">
+                #{afterStatus,jdbcType=INTEGER},
+            </if>
+            <if test="productAmountTotal != null">
+                #{productAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmountTotal != null">
+                #{orderAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="logisticsFee != null">
+                #{logisticsFee,jdbcType=BIGINT},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="payChannel != null">
+                #{payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deliveryTime != null">
+                #{deliveryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSettlementStatus != null">
+                #{orderSettlementStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderSettlementTime != null">
+                #{orderSettlementTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPackage != null">
+                #{isPackage,jdbcType=INTEGER},
+            </if>
+            <if test="isIntegral != null">
+                #{isIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteTime != null">
+                #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.athen.order.api.model.OrderExample" resultType="java.lang.Integer">
+        select count(*) from `order`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update `order`
+        <set>
+            <if test="record.id != null">
+                `id` = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderNo != null">
+                `order_no` = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberId != null">
+                `member_id` = #{record.memberId,jdbcType=BIGINT},
+            </if>
+            <if test="record.supplierId != null">
+                `supplier_id` = #{record.supplierId,jdbcType=BIGINT},
+            </if>
+            <if test="record.supplierName != null">
+                `supplier_name` = #{record.supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderStatus != null">
+                `order_status` = #{record.orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.afterStatus != null">
+                `after_status` = #{record.afterStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.productAmountTotal != null">
+                `product_amount_total` = #{record.productAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderAmountTotal != null">
+                `order_amount_total` = #{record.orderAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="record.logisticsFee != null">
+                `logistics_fee` = #{record.logisticsFee,jdbcType=BIGINT},
+            </if>
+            <if test="record.address != null">
+                `address` = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payChannel != null">
+                `pay_channel` = #{record.payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="record.tradeNo != null">
+                `trade_no` = #{record.tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payTime != null">
+                `pay_time` = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deliveryTime != null">
+                `delivery_time` = #{record.deliveryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.finishTime != null">
+                `finish_time` = #{record.finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.orderSettlementStatus != null">
+                `order_settlement_status` = #{record.orderSettlementStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderSettlementTime != null">
+                `order_settlement_time` = #{record.orderSettlementTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isPackage != null">
+                `is_package` = #{record.isPackage,jdbcType=INTEGER},
+            </if>
+            <if test="record.isIntegral != null">
+                `is_integral` = #{record.isIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deleteTime != null">
+                `delete_time` = #{record.deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.athen.order.api.model.Order">
+        update `order`
+        <set>
+            <if test="orderNo != null">
+                `order_no` = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                `member_id` = #{memberId,jdbcType=BIGINT},
+            </if>
+            <if test="supplierId != null">
+                `supplier_id` = #{supplierId,jdbcType=BIGINT},
+            </if>
+            <if test="supplierName != null">
+                `supplier_name` = #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                `order_status` = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="afterStatus != null">
+                `after_status` = #{afterStatus,jdbcType=INTEGER},
+            </if>
+            <if test="productAmountTotal != null">
+                `product_amount_total` = #{productAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="orderAmountTotal != null">
+                `order_amount_total` = #{orderAmountTotal,jdbcType=BIGINT},
+            </if>
+            <if test="logisticsFee != null">
+                `logistics_fee` = #{logisticsFee,jdbcType=BIGINT},
+            </if>
+            <if test="address != null">
+                `address` = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="payChannel != null">
+                `pay_channel` = #{payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="tradeNo != null">
+                `trade_no` = #{tradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null">
+                `pay_time` = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deliveryTime != null">
+                `delivery_time` = #{deliveryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                `finish_time` = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSettlementStatus != null">
+                `order_settlement_status` = #{orderSettlementStatus,jdbcType=INTEGER},
+            </if>
+            <if test="orderSettlementTime != null">
+                `order_settlement_time` = #{orderSettlementTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPackage != null">
+                `is_package` = #{isPackage,jdbcType=INTEGER},
+            </if>
+            <if test="isIntegral != null">
+                `is_integral` = #{isIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteTime != null">
+                `delete_time` = #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where `id` = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+com/athen/dubbo/config/DubboProviderAutoConfiguration.class
+com/athen/dubbo/parse/ParseConfig.class
+com/athen/dubbo/config/DubboConsumerAutoConfiguration.class
+com/athen/dubbo/model/DubboProperties.class
+com/athen/dubbo/core/ReferenceConfig$1.class
+com/athen/dubbo/parse/ParseDubboConfig.class
+com/athen/dubbo/core/ServiceConfig$1.class
+com/athen/dubbo/config/DubboAutoConfiguration.class
+com/athen/dubbo/annotation/FReference.class
+com/athen/dubbo/core/ReferenceConfig.class
+com/athen/dubbo/core/ServiceBean.class
+com/athen/dubbo/core/ServiceConfig.class
+com/athen/dubbo/model/ClassIdBean.class
+com/athen/dubbo/core/ReferenceBean.class
+com/athen/dubbo/config/DubboConsumerAutoConfiguration$1.class
+com/athen/dubbo/annotation/EnableCustomDubboService.class
+com/athen/dubbo/annotation/FService.class

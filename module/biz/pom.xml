@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.athen</groupId>
+		<artifactId>module</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.athen</groupId>
+	<artifactId>athen-biz</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>athen-biz</name>
+	<packaging>pom</packaging>
+	<url>http://maven.apache.org</url>
+	<description>业务模块</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<nexus.url>http://183.62.174.52:8081</nexus.url>
+	</properties>
+
+	<modules>
+		<module>system</module>
+		<module>order</module>
+	</modules>
+</project>

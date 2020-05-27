@@ -1,0 +1,65 @@
+
+## org.springframework.boot.autoconfigure.web.ServerProperties
+server:
+  port: 7090
+  session-timeout: 2592000  # 单位: 秒. <= 30 * 24 * 60 * 60
+
+
+online: false
+
+# dubbo
+spring:
+    dubbo:
+      application:
+       name: system-dubbo-consumer
+      registry:
+        address: zookeeper://47.52.198.122:2181
+      protocol:
+        name: dubbo
+        port: 20880
+      scan:
+        base-packages: com.athen.system.service
+# 域名
+domain:
+  index:    http://127.0.0.1:7079             # pc 端对应的域名
+  api:      http://127.0.0.1:7080             # 接口调用对应的域名, 线上走 https
+  manager:  http://127.0.0.1:7081             # 后台管理对应的域名
+
+  still:    http://127.0.0.1:7081/static # 资源文件对应的域名, css png js 等
+  upload:   http://127.0.0.1/upload           # 用户上传的图片、文件目录对应的域名
+
+uploadPath: /home/admin/upload/               # 图片、文件存放地址, 此目录与上面的 domain.upload 相对应
+
+# 默认会去找 classpath 下的 logback.xml. 为了达到 profile 的目的故意不用这个文件名
+#logging.config: classpath:log-dev.xml
+
+
+
+##  https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+spring:
+# http://stackoverflow.com/questions/28902374/spring-boot-rest-service-exception-handling/30193013#30193013
+# 当找不到 handle 时. 默认会发起 response.sendError(404) --> DispatcherServlet.noHandlerFound()
+# 配置下面两个值将会走到 ControllerAdvice 全局里面去
+  mvc.throw-exception-if-no-handler-found: true
+  resources.add-mappings: false
+
+# org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  redis:
+    host: 192.168.10.224
+    port: 6380
+
+# org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration
+  freemarker.settings:
+    template_exception_handler: rethrow
+    template_update_delay: 0
+    classic_compatible: true
+    number_format: 0.######
+
+# org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration
+  http.multipart:
+    # 上传文件时最大值(默认是 1Mb)
+    maxFileSize: 12Mb
+    # 一个 method="POST" enctype="multipart/form-data" 请求域能发送的最大值(默认 10Mb)
+    maxRequestSize: 20Mb
+
+# 静态资源文件: org.springframework.boot.autoconfigure.web.ResourceProperties
