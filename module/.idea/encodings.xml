@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-config" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-config/athen-config-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-config/athen-config-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-exception" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-mongodb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-rpc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-rpc/athen-rpc-dubbo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-rpc/athen-rpc-ice" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-base-rpc/athen-rpc-springCloud" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/base/athen-dynamic-datasource" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/order/biz-order-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/order/biz-order-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/order/biz-order-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/system/biz-system-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/system/biz-system-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biz/system/biz-system-web" charset="UTF-8" />
+  </component>
+</project>
